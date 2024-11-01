@@ -19,7 +19,7 @@ add_compile_options("--coverage")
 add_executable(
   cleancode
   CheckTemperatureBreach.cpp
-  AlertTemparatureBreach.cpp
+  AlertTemperatureBreach.cpp
   main.cpp
   typewise-alert.tests.cpp
 )
