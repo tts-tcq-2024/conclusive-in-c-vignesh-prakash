@@ -28,6 +28,8 @@ static const RangeOfTemperature Range[] = {
     {0, 40}   // MED_ACTIVE_COOLING
 };
 
+RangeOfTemperature getTemperatureRange(CoolingType coolingType);
+void sendAlert(AlertTarget alertTarget, BreachType breachType);
 BreachType inferBreach(double value, double lowerLimit, double upperLimit);
 BreachType classifyTemperatureBreach(CoolingType coolingType, double temperatureInC);
 
