@@ -11,25 +11,16 @@ BreachType inferBreach(double value, double lowerLimit, double upperLimit) {
   return NORMAL;
 }
 
-BreachType classifyTemperatureBreach(
-    CoolingType coolingType, double temperatureInC) {
-  int lowerLimit = 0;
-  int upperLimit = 0;
-  switch(coolingType) {
-    case PASSIVE_COOLING:
-      lowerLimit = 0;
-      upperLimit = 35;
-      break;
-    case HI_ACTIVE_COOLING:
-      lowerLimit = 0;
-      upperLimit = 45;
-      break;
-    case MED_ACTIVE_COOLING:
-      lowerLimit = 0;
-      upperLimit = 40;
-      break;
-  }
-  return inferBreach(temperatureInC, lowerLimit, upperLimit);
+RangeOfTemperature getTemperatureRange(CoolingType coolingType) {
+    if (coolingType < PASSIVE_COOLING || coolingType > MED_ACTIVE_COOLING) {
+        fprintf(stderr, "Error: Invalid cooling type.\n");
+    }
+    return Range[coolingType];
+}
+
+BreachType classifyTemperatureBreach(CoolingType coolingType, double temperatureInC) {
+  RangeOfTemperature RangeOfCooling = getTemperatureRange(coolingType);
+  return inferBreach(temperatureInC, RangeOfCooling.lowerLimit, RangeOfCooling.upperLimit);
 }
 
 void sendAlert(AlertTarget alertTarget, BreachType breachType) {
