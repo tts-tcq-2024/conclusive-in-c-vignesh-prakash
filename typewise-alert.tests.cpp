@@ -1,7 +1,8 @@
 #include <gtest/gtest.h>
-#include "typewise-alert.h"
+#include "main.h"
 
 TEST(TypeWiseAlertTestSuite,InfersBreachAccordingToLimits) {
 
+  checkAndAlert(AlertTarget alertTarget, BatteryCharacter batteryChar, double temperatureInC);
 
 }
