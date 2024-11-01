@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "main.h"
+#include "CheckTemperatureBreach.h"
 
 TEST(TypeWiseAlertTestSuite,InfersBreachAccordingToLimits) {
 
