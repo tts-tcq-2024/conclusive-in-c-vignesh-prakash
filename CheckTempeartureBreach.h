@@ -22,6 +22,12 @@ typedef struct {
   char brand[48];
 } BatteryCharacter;
 
+static const RangeOfTemperature Range[] = {
+    {0, 35},  // PASSIVE_COOLING
+    {0, 45},  // HI_ACTIVE_COOLING
+    {0, 40}   // MED_ACTIVE_COOLING
+};
+
 BreachType inferBreach(double value, double lowerLimit, double upperLimit);
 BreachType classifyTemperatureBreach(CoolingType coolingType, double temperatureInC);
 
