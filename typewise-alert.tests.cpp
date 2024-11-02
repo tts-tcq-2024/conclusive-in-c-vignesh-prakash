@@ -84,24 +84,6 @@ TEST(TypeWiseAlertTestSuite, sendAlertValidAndInvalidTargets) {
                 ::testing::ExitedWithCode(EXIT_FAILURE), "Error: Invalid alert target.");
 }
 
-// Test checkAndAlert for high temperature
-TEST(TypeWiseAlertTestSuite, CheckAndAlertHighTemperature) {
-    BatteryCharacter batteryChar;
-    batteryChar.coolingType = HI_ACTIVE_COOLING;
-
-    EXPECT_CALL(mockAlert, sendToEmail(TOO_HIGH)).Times(1);
-    checkAndAlert(TO_EMAIL, batteryChar, 46);  // Exceeds HI_ACTIVE_COOLING limit
-}
-
-// Test checkAndAlert for normal temperature
-TEST(TypeWiseAlertTestSuite, CheckAndAlertNormalTemperature) {
-    BatteryCharacter batteryChar;
-    batteryChar.coolingType = PASSIVE_COOLING;
-
-    EXPECT_CALL(mockAlert, sendToEmail(NORMAL)).Times(1);
-    checkAndAlert(TO_EMAIL, batteryChar, 25);  // Within PASSIVE_COOLING limit
-}
-
 // Test checkAndAlert for low temperature
 TEST(TypeWiseAlertTestSuite, CheckAndAlertLowTemperature) {
     BatteryCharacter batteryChar;
@@ -110,3 +92,22 @@ TEST(TypeWiseAlertTestSuite, CheckAndAlertLowTemperature) {
     EXPECT_CALL(mockAlert, sendToEmail(TOO_LOW)).Times(1);
     checkAndAlert(TO_EMAIL, batteryChar, -5);  // Below MED_ACTIVE_COOLING limit
 }
+
+// Test checkAndAlert for high temperature
+TEST(TypeWiseAlertTestSuite, CheckAndAlertHighTemperature) {
+    BatteryCharacter batteryChar;
+    batteryChar.coolingType = HI_ACTIVE_COOLING;
+
+    EXPECT_CALL(mockAlert, sendToEmail(TOO_HIGH)).Times(1);
+    checkAndAlert(TO_EMAIL, batteryChar, 49);  // Exceeds HI_ACTIVE_COOLING limit
+}
+
+// Test checkAndAlert for normal temperature
+TEST(TypeWiseAlertTestSuite, CheckAndAlertNormalTemperature) {
+    BatteryCharacter batteryChar;
+    batteryChar.coolingType = PASSIVE_COOLING;
+
+    EXPECT_CALL(mockAlert, sendToEmail(NORMAL)).Times(1);
+    checkAndAlert(TO_EMAIL, batteryChar, 20);  // Within PASSIVE_COOLING limit
+}
+
