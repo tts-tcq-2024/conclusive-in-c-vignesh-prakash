@@ -22,6 +22,11 @@ typedef struct {
   char brand[48];
 } BatteryCharacter;
 
+typedef struct {
+    double lowerLimit;
+    double upperLimit;
+} RangeOfTemperature;
+
 static const RangeOfTemperature Range[] = {
     {0, 35},  // PASSIVE_COOLING
     {0, 45},  // HI_ACTIVE_COOLING
