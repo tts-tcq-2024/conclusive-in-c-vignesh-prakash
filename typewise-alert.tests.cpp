@@ -13,33 +13,33 @@ public:
 // Global mock alert instance
 MockAlert mockAlert;
 
-// Test for getTemperatureLimits with invalid cooling type less than PASSIVE_COOLING
-TEST(TemperatureLimitsTestSuite, GetTemperatureLimitsInvalidCoolingTypeLessThan) {
-    EXPECT_EXIT(getTemperatureLimits(static_cast<CoolingType>(-1)), 
+// Test for getTemperatureRange with invalid cooling type less than PASSIVE_COOLING
+TEST(RangeOfTemperature TestSuite, getTemperatureRangeInvalidCoolingTypeLessThan) {
+    EXPECT_EXIT(getTemperatureRange(static_cast<CoolingType>(-1)), 
                 ::testing::ExitedWithCode(EXIT_FAILURE), "Error: Invalid cooling type.");
 }
 
-// Test for getTemperatureLimits with invalid cooling type greater than MED_ACTIVE_COOLING
-TEST(TemperatureLimitsTestSuite, GetTemperatureLimitsInvalidCoolingTypeGreaterThan) {
-    EXPECT_EXIT(getTemperatureLimits(static_cast<CoolingType>(3)), 
+// Test for getTemperatureRange with invalid cooling type greater than MED_ACTIVE_COOLING
+TEST(RangeOfTemperature TestSuite, getTemperatureRangeInvalidCoolingTypeGreaterThan) {
+    EXPECT_EXIT(getTemperatureRange(static_cast<CoolingType>(3)), 
                 ::testing::ExitedWithCode(EXIT_FAILURE), "Error: Invalid cooling type.");
 }
 
-// Test for getTemperatureLimits with valid cooling types
-TEST(TemperatureLimitsTestSuite, GetTemperatureLimitsValidCoolingTypes) {
-    TemperatureLimits limits;
+// Test for getTemperatureRange with valid cooling types
+TEST(RangeOfTemperature TestSuite, getTemperatureRangeValidCoolingTypes) {
+    RangeOfTemperature  Range;
 
-    limits = getTemperatureLimits(PASSIVE_COOLING);
-    EXPECT_EQ(limits.lowerLimit, 0);
-    EXPECT_EQ(limits.upperLimit, 35);
+    Range = getTemperatureRange(PASSIVE_COOLING);
+    EXPECT_EQ(Range.lowerLimit, 0);
+    EXPECT_EQ(Range.upperLimit, 35);
 
-    limits = getTemperatureLimits(MED_ACTIVE_COOLING);
-    EXPECT_EQ(limits.lowerLimit, 0);
-    EXPECT_EQ(limits.upperLimit, 40);
+    Range = getTemperatureRange(MED_ACTIVE_COOLING);
+    EXPECT_EQ(Range.lowerLimit, 0);
+    EXPECT_EQ(Range.upperLimit, 40);
 
-    limits = getTemperatureLimits(HI_ACTIVE_COOLING);
-    EXPECT_EQ(limits.lowerLimit, 0);
-    EXPECT_EQ(limits.upperLimit, 45);
+    Range = getTemperatureRange(HI_ACTIVE_COOLING);
+    EXPECT_EQ(Range.lowerLimit, 0);
+    EXPECT_EQ(Range.upperLimit, 45);
 }
 
 // Test inferBreach for TOO_LOW, TOO_HIGH, and NORMAL cases
@@ -72,15 +72,15 @@ TEST(TypeWiseAlertTestSuite, SendToEmailInvalidBreachType) {
                 ::testing::ExitedWithCode(EXIT_FAILURE), "Error: Invalid breach type for email notification.");
 }
 
-// Test handleAlert with valid and invalid alert targets
-TEST(TypeWiseAlertTestSuite, HandleAlertValidAndInvalidTargets) {
+// Test sendAlert with valid and invalid alert targets
+TEST(TypeWiseAlertTestSuite, sendAlertValidAndInvalidTargets) {
     EXPECT_CALL(mockAlert, sendToController(TOO_HIGH)).Times(1);
-    handleAlert(TO_CONTROLLER, TOO_HIGH);
+    sendAlert(TO_CONTROLLER, TOO_HIGH);
 
     EXPECT_CALL(mockAlert, sendToEmail(TOO_LOW)).Times(1);
-    handleAlert(TO_EMAIL, TOO_LOW);
+    sendAlert(TO_EMAIL, TOO_LOW);
 
-    EXPECT_EXIT(handleAlert(static_cast<AlertTarget>(-1), TOO_HIGH), 
+    EXPECT_EXIT(sendAlert(static_cast<AlertTarget>(-1), TOO_HIGH), 
                 ::testing::ExitedWithCode(EXIT_FAILURE), "Error: Invalid alert target.");
 }
 
