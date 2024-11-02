@@ -17,3 +17,11 @@ void sendToEmail(BreachType breachType) {
         printf("%s\n", messages[breachType]);
     } 
 }
+
+void sendAlert(AlertTarget alertTarget, BreachType breachType) {
+    if (alertTarget == TO_CONTROLLER) {
+        sendToController(breachType);
+    } else if (alertTarget == TO_EMAIL) {
+        sendToEmail(breachType);
+    } 
+}
