@@ -1,8 +1,9 @@
 #include "CheckTemperatureBreach.h"
 #include "AlertTemperatureBreach.h"
 #include <stdio.h>
+#include <string.h>
 
-void main() {
+int main() {
     AlertTarget alertTarget = TO_CONTROLLER;
    
     BatteryCharacter batteryChar;
@@ -13,5 +14,7 @@ void main() {
     double temperatureInC = 40.0;
     
     checkAndAlert(alertTarget,batteryChar,temperatureInC);
+
+    return 0;
 }
 
