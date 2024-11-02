@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "CheckTemperatureBreach.h"
 
 void sendToController(BreachType breachType) {
