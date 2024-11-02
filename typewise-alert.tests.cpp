@@ -14,32 +14,32 @@ public:
 MockAlert mockAlert;
 
 // Test for getTemperatureRange with invalid cooling type less than PASSIVE_COOLING
-TEST(RangeOfTemperature TestSuite, getTemperatureRangeInvalidCoolingTypeLessThan) {
+TEST(RangeOfTemperatureTestSuite, getTemperatureRangeInvalidCoolingTypeLessThan) {
     EXPECT_EXIT(getTemperatureRange(static_cast<CoolingType>(-1)), 
                 ::testing::ExitedWithCode(EXIT_FAILURE), "Error: Invalid cooling type.");
 }
 
 // Test for getTemperatureRange with invalid cooling type greater than MED_ACTIVE_COOLING
-TEST(RangeOfTemperature TestSuite, getTemperatureRangeInvalidCoolingTypeGreaterThan) {
+TEST(RangeOfTemperatureTestSuite, getTemperatureRangeInvalidCoolingTypeGreaterThan) {
     EXPECT_EXIT(getTemperatureRange(static_cast<CoolingType>(3)), 
                 ::testing::ExitedWithCode(EXIT_FAILURE), "Error: Invalid cooling type.");
 }
 
 // Test for getTemperatureRange with valid cooling types
-TEST(RangeOfTemperature TestSuite, getTemperatureRangeValidCoolingTypes) {
-    RangeOfTemperature  Range;
+TEST(RangeOfTemperatureTestSuite, getTemperatureRangeValidCoolingTypes) {
+    RangeOfTemperature  limits;
 
-    Range = getTemperatureRange(PASSIVE_COOLING);
-    EXPECT_EQ(Range.lowerLimit, 0);
-    EXPECT_EQ(Range.upperLimit, 35);
+    limits = getTemperatureRange(PASSIVE_COOLING);
+    EXPECT_EQ(limits.lowerLimit, 0);
+    EXPECT_EQ(limits.upperLimit, 35);
 
-    Range = getTemperatureRange(MED_ACTIVE_COOLING);
-    EXPECT_EQ(Range.lowerLimit, 0);
-    EXPECT_EQ(Range.upperLimit, 40);
+    limits = getTemperatureRange(MED_ACTIVE_COOLING);
+    EXPECT_EQ(limits.lowerLimit, 0);
+    EXPECT_EQ(limits.upperLimit, 40);
 
-    Range = getTemperatureRange(HI_ACTIVE_COOLING);
-    EXPECT_EQ(Range.lowerLimit, 0);
-    EXPECT_EQ(Range.upperLimit, 45);
+    limits = getTemperatureRange(HI_ACTIVE_COOLING);
+    EXPECT_EQ(limits.lowerLimit, 0);
+    EXPECT_EQ(limits.upperLimit, 45);
 }
 
 // Test inferBreach for TOO_LOW, TOO_HIGH, and NORMAL cases
