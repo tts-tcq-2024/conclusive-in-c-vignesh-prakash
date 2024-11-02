@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include "CheckTemperatureBreach.h"
+#include "AlertTemperatureBreach.h"
 
 class MockAlert {
 public:
