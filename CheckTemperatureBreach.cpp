@@ -1,4 +1,5 @@
 #include "CheckTemperatureBreach.h"
+#include "AlertTemperatureBreach.h"
 #include <stdio.h>
 
 BreachType inferBreach(double value, double lowerLimit, double upperLimit) {
@@ -21,14 +22,6 @@ RangeOfTemperature getTemperatureRange(CoolingType coolingType) {
 BreachType classifyTemperatureBreach(CoolingType coolingType, double temperatureInC) {
   RangeOfTemperature RangeOfCooling = getTemperatureRange(coolingType);
   return inferBreach(temperatureInC, RangeOfCooling.lowerLimit, RangeOfCooling.upperLimit);
-}
-
-void sendAlert(AlertTarget alertTarget, BreachType breachType) {
-    if (alertTarget == TO_CONTROLLER) {
-        sendToController(breachType);
-    } else if (alertTarget == TO_EMAIL) {
-        sendToEmail(breachType);
-    } 
 }
 
 void checkAndAlert(AlertTarget alertTarget, BatteryCharacter batteryChar, double temperatureInC) {
